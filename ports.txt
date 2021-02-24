@@ -1,0 +1,18 @@
+The following ports are used for the different services:
+
+8080 = api-gateway
+8888 = config-server
+8085 = eureka-server
+8015 = authentication-service
+8020 = job-indexing
+8025 = profile-indexing
+4200 = jobheist-ui
+8030 = jobprofile-service
+8035 = experience-processing
+8040 = personal-information-processing
+8045 = skill-processing
+8111 = jobrecruiterprofile-service
+8050 = query-engine
+27017 = mongodb
+15672 = rabbitMQ
+

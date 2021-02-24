@@ -1,0 +1,113 @@
+
+.mat-raised-button{
+    
+    width: fit-content;
+    align-self: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    -moz-box-align: center;
+    justify-content: center;
+    margin: 10px 50px;
+}
+.example-card {
+    margin-top: 10px;
+    margin-bottom: 3%;
+    max-width: 400px;
+  }
+.profile-card{
+    width: 100%;
+}
+  
+.initials-image {
+    background-size: cover;
+    color: white;
+    font-size: 120px;
+    text-align: center;
+    line-height: 180px;
+    letter-spacing: 0.2625px;
+}
+
+  .mat-card-avatar{
+    height: 180px;
+    width: 180px;
+    margin: auto;
+}
+mat-card{
+    justify-content: center;
+    justify-items: center;
+}
+mat-card-title{
+    padding-top: 3%;
+}
+mat-card-subtitle{
+    padding-top: 3%;
+}
+#skillTitle{
+    padding-top: 20%;
+}
+ .profileHeader{
+    
+    justify-content: center !important;
+    
+}
+.profileTitle{
+    padding: 10px !important;
+    margin: auto !important;
+    text-align: center !important;
+}
+.profileSubtitle{
+    margin: auto !important;
+    text-align: center !important;
+}
+.skills{
+    list-style: none;
+    margin: 0%;
+    padding: 0%;
+}
+.contact{
+    list-style: none;
+    padding: 0%;
+}
+#edit-skills-button{
+    align-items: stretch;
+}
+#skillName{
+    width: 100px;
+}
+#proficiency{
+    width: 100px;
+}
+/*
+div{
+    border: solid 0.02rem;
+}
+*/
+.section-heading{
+    width: 23rem;
+}
+.experience-role{
+    font-size: 18px;
+    padding: 0%;
+    margin: 0;
+}
+.hiddenButton{
+    color: white;
+}
+.hiddenButton:hover{
+    color: black;
+}
+img{
+    border-radius: 50%;
+}
+.title-center {
+    flex: 1 1 auto;
+    font-size: 20px;
+    justify-content: center;
+  /* text-align: center; */
+   
+  } 
+  .bgcol{
+      background-color:rgb(201, 196, 196);
+  }
+

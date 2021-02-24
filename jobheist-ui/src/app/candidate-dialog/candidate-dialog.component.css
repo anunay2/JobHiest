@@ -1,0 +1,14 @@
+.field{
+    width: 200px;
+  }
+  .value{
+    width: 400px;
+  }
+  .candidateProfile{
+    font-weight: 120px;
+    font-size: 20px;
+  }
+  .row-card{
+    width: 80%;
+    align-self: center;
+  }

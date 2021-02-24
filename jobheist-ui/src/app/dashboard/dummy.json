@@ -1,0 +1,29 @@
+{
+    "Jobs": [
+        {
+            "jobTitle": "software developer",
+            "workingLocation": "bangalore",
+            "salary": "200000"
+        },
+        {
+            "jobTitle": "machine algo developer",
+            "workingLocation": "bangalore",
+            "salary": "3500000"
+        },
+        {
+            "jobTitle": "software developer",
+            "workingLocation": "mumbai",
+            "salary": "1000000"
+        },
+        {
+            "jobTitle": "software developer",
+            "workingLocation": "bangalore",
+            "salary": "500000"
+        },
+        {
+            "jobTitle": "software developer",
+            "workingLocation": "hyderabad",
+            "salary": "134000"
+        }
+    ]
+}

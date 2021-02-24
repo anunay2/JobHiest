@@ -1,0 +1,252 @@
+<app-navbar-profile-recruiter></app-navbar-profile-recruiter>
+<mat-toolbar-row class="bgcol">
+  <span class="title-center">Post a New Opening</span>
+</mat-toolbar-row>
+
+<section class="main-body">
+  <mat-horizontal-stepper class="stepper" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Fill out Job Details</ng-template>
+      <form class="hire-form full-card align-center" [formGroup]="jobUpdateForm"
+        (ngSubmit)="jobUpdateForm.valid && onJobPost()">
+
+        <mat-form-field appearance="fill" class="full-width">
+          <!-- <mat-label>Enter your email</mat-label> -->
+          <input matInput placeholder="pat@example.com" formControlName="recruiterEmail">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Job Title</mat-label>
+          <input matInput #titleInput maxlength="50" formControlName="jobTitle" errorMessage="Name is required.">
+          <mat-hint *ngIf="jobUpdateForm.controls.jobTitle.touched" align="end">
+            {{titleInput.value?.length || 0}}/50</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Job Description</mat-label>
+          <textarea matInput type="text" #jobDesc maxlength="2000" formControlName="jobDescription"></textarea>
+          <mat-hint *ngIf="jobUpdateForm.controls.jobDescription.touched" align="end">
+            {{jobDesc.value?.length || 0}}/2000</mat-hint>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Joining Date</mat-label>
+          <input matInput [min]="minDate" [max]="maxDate" formControlName="joiningDate" [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Organisation</mat-label>
+          <input matInput #organisation maxlength="30" formControlName="organisation">
+          <mat-hint *ngIf="jobUpdateForm.controls.organisation.touched" align="end">
+            {{organisation.value?.length || 0}}/30</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Organisation Description</mat-label>
+          <textarea matInput #orgDesc maxlength="2000" formControlName="orgDescription"></textarea>
+          <mat-hint *ngIf="jobUpdateForm.controls.orgDescription.touched" align="end">
+            {{orgDesc.value?.length || 0}}/2000</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Working Location</mat-label>
+          <input matInput #location maxlength="20" formControlName="workingLocation">
+          <mat-hint *ngIf="jobUpdateForm.controls.workingLocation.touched" align="end">
+            {{location.value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+
+        <mat-checkbox [formControl]="disableSelect">Disable salary</mat-checkbox>
+
+        <!-- <mat-slide-toggle [(ngModel)]="disable">Slide me!</mat-slide-toggle> -->
+        <mat-expansion-panel [disabled]="disableSelect.value">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Salary
+            </mat-panel-title>
+            <mat-panel-description>
+              Give a range for Salary
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <mat-label>Min Salary (INR)</mat-label>
+            <input matInput type="number" formControlName="minSalary">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Max Salary (INR)</mat-label>
+            <input matInput type="number" formControlName="maxSalary" [disabled]="disableSelect.value">
+          </mat-form-field>
+          <p *ngIf="jobUpdateForm.hasError('salaryError')">maxValue should be higher than minValue</p>
+        </mat-expansion-panel>
+        <br>
+        <button mat-raised-button matStepperNext class="step-next">Next</button>
+      </form>
+    </mat-step>
+
+    <br>
+    <mat-step>
+      <ng-template matStepLabel>Fill Info for desired candidate</ng-template>
+      <form class="hire-form full-card align-center" [formGroup]="jobUpdateForm"
+        (ngSubmit)="jobUpdateForm.valid && onJobPost()">
+        <!-- <mat-expansion-panel (opened)="setStep(0)" hideToggle> -->
+
+
+        <!-- <input matInput formControlName="totalExperience" [(ngModel)]="candidateProfile.totalExperience"> -->
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Total Experience
+            </mat-panel-title>
+            <mat-panel-description>
+              Type max and min value for Experience
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <mat-label>Min Value (Years)</mat-label>
+            <input matInput type="number" max="50" formControlName="minExperience">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Max Value (Years)</mat-label>
+            <input matInput type="number" min="1" max="50" formControlName="maxExperience">
+          </mat-form-field>
+          <p *ngIf="jobUpdateForm.hasError('experienceError')">maxValue should be higher than minValue</p>
+
+        </mat-expansion-panel>
+
+        <br>
+
+
+        <!-- <mat-form-field class="full-width">
+          <mat-label>Domains</mat-label>
+          <input matInput formControlName="domains" [(ngModel)]="candidateProfile.domains">
+        </mat-form-field> -->
+
+
+        <mat-form-field class="chip-list">
+          <mat-chip-list #domainchipList aria-label="domainOptions" formArrayName="domainArray">
+            <mat-chip *ngFor="let domain of domains.controls; let i = index" [selectable]="selectable"
+              [removable]="removable" (removed)="remove_domain(domain,i)">
+              {{domain.value}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Domains" #domainInput [formControl]="domainCtrl" [matAutocomplete]="autodomain"
+              [matChipInputFor]="domainchipList" [matChipInputAddOnBlur]="false"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add_domain($event)">
+          </mat-chip-list>
+          <mat-autocomplete #autodomain="matAutocomplete" (optionSelected)="selected_domain($event)">
+            <mat-option *ngFor="let domain of filtereddomains | async" [value]="domain">
+              {{domain}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="full-width"> 
+          <mat-label>Roles</mat-label>
+          <input matInput formControlName="roles" [(ngModel)]="candidateProfile.roles">
+        </mat-form-field> -->
+
+
+        <mat-form-field class="chip-list">
+          <mat-chip-list #rolechipList aria-label="roleOptions" formArrayName="roleArray">
+            <mat-chip *ngFor="let role of roles.controls; let i = index" [selectable]="selectable"
+              [removable]="removable" (removed)="remove_role(role,i)">
+              {{role.value}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Roles" #roleInput [formControl]="roleCtrl" [matAutocomplete]="autorole"
+              [matChipInputFor]="rolechipList" [matChipInputAddOnBlur]="false"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add_role($event)">
+          </mat-chip-list>
+          <mat-autocomplete #autorole="matAutocomplete" (optionSelected)="selected_role($event)">
+            <mat-option *ngFor="let role of filteredroles | async" [value]="role">
+              {{role}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Age
+            </mat-panel-title>
+            <mat-panel-description>
+              Type max and min value for Age
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <mat-label>Min Age</mat-label>
+            <input matInput type="number" name="min_age" formControlName="minAge">
+
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Max Age</mat-label>
+            <input matInput type="number" formControlName="maxAge">
+          </mat-form-field>
+          <p *ngIf="jobUpdateForm.hasError('ageError')">maxValue should be higher than minValue</p>
+        </mat-expansion-panel>
+
+        <br>
+        <!-- <mat-form-field class="full-width">
+          <mat-label>Skill</mat-label>
+          <input matInput formControlName="skill" [(ngModel)]="candidateProfile.skill">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-autocomplete>
+        </mat-form-field> -->
+
+
+        <mat-form-field class="chip-list">
+
+          <mat-chip-list #skillchipList aria-label="skillOptions" formArrayName="skillArray">
+            <mat-chip *ngFor="let skill of skills.controls; let i = index" [selectable]="selectable"
+              [removable]="removable" (removed)="remove_skill(skill,i)">
+              {{skill.value}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+
+            <input placeholder="Skill" #skillInput [formControl]="skillCtrl" [matChipInputAddOnBlur]="false"
+              [matAutocomplete]="autoskill" [matChipInputFor]="skillchipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add_skill($event)">
+          </mat-chip-list>
+          <mat-autocomplete #autoskill="matAutocomplete" (optionSelected)="selected_skill($event)">
+            <mat-option *ngFor="let skill of filteredskills | async" [value]="skill">
+              {{skill}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <br>
+
+        <mat-checkbox class="full-width" [formControl]="disableSubmit" [disabled]="!jobUpdateForm.valid">
+          I agree that this information is correct
+        </mat-checkbox>
+        <!-- <p>{{jobUpdateForm.value | json}}</p> -->
+        <br>
+        <br>
+
+        <div>
+        <button mat-raised-button matStepperPrevious class="step-previous">Previous</button>
+
+        <button mat-raised-button color="primary" type="submit"
+          [disabled]="!disableSubmit.value" class="step-next">Submit</button>
+
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</section>
+<app-footer></app-footer>
+<router-outlet></router-outlet>

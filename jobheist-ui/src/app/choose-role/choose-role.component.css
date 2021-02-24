@@ -1,0 +1,24 @@
+button{
+    height: 7vw;
+    width: 15vw;
+    margin: 5rem 2rem 5rem 2rem;
+    border-style: none;
+    /* background-color:#3F51B5; */
+    font-size: 3vw;
+    text-align: center;
+}
+.container{
+    
+    width: 100%;
+    margin: 0%;
+    height: 62%;
+}
+.title-center {
+    flex: 1 1 auto;
+    font-size: 20px;
+    justify-content: center;
+    /* margin-left: 45%; */
+  }
+  .bgcol{
+    background-color:rgb(201, 196, 196);
+}

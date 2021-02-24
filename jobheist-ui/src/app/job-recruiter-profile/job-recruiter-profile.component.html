@@ -1,0 +1,116 @@
+<!-- Nav Bar-->
+<app-navbar-profile-recruiter></app-navbar-profile-recruiter>
+<mat-toolbar-row class="bgcol">
+    <span class="title-center">Hello Recruiter!!</span>
+  </mat-toolbar-row>
+
+<mat-divider></mat-divider>
+<section class="backgroundcol">
+    <div fxLayout="column" fxLayoutAlign="center" id="parent">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%" fxLayoutGap.lt-sm="1%" fxLayoutAlign.lt-md="space-between center">
+
+            <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="3%" fxLayoutGap.lt-sm="1%">
+                <mat-card class="example-card">
+
+                    <div mat-card-avatar *ngIf="initial.length !== 0" class="initials-image" [ngStyle]="{'background-color': circleColor }">
+                        {{initial}}
+                        
+                    </div>
+                    <div fxLayoutAlign="center">
+                        <img *ngIf="initial.length === 0" src="./assets/images/johndoe.jpg" alt="">
+                      </div>
+                    <mat-card-header  class="profileHeader">
+                        <mat-card-title class="profileTitle">{{jobRecruiterProfile.name}}</mat-card-title>
+                        <mat-card-subtitle class="profileSubtitle">{{jobRecruiterProfile.email}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <br><br>
+                    <mat-card-content>
+                        <div fxLayout="column" fxLayout.lt-md="row" fxLayoutAlign="center" fxLayoutGap="0.1%">
+                            <button mat-raised-button (click)="allposting()">All Postings</button>
+                            <button mat-raised-button (click)="postvacancy()">Post Vacancy</button>
+                        </div>
+                         </mat-card-content>
+                </mat-card>
+            </div>
+
+
+
+            <div fxLayout="column" fxLayoutGap="5%" fxLayoutAlign="center" fxLayoutGap.lt-sm="1%">
+                <div fxLayout="row" fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+                    <mat-card class="example-card profile-card">
+                        <div fxLayout ="row">
+                            <div>
+                        <mat-card-title>Profile Information </mat-card-title>
+                    
+                 <mat-card-content>
+                                
+                    <form class="info-form" [formGroup]="cinfoUpdateForm" (ngSubmit)="onInfoEdit()">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Email Id</mat-label>
+                            <input matInput formControlName="email" [(ngModel)]="jobRecruiterProfile.email">
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input matInput formControlName="name" [(ngModel)]="jobRecruiterProfile.name">
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Organisation</mat-label>
+                            <input matInput formControlName="organisation" [(ngModel)]="jobRecruiterProfile.organisation">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>GSTIN</mat-label>
+                            <input matInput formControlName="gst" [(ngModel)]="jobRecruiterProfile.gst">
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>PIN Code</mat-label>
+                            <input matInput formControlName="pin" [(ngModel)]="jobRecruiterProfile.pin">
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput formControlName="mob" [(ngModel)]="jobRecruiterProfile.mob">
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Organisation Type</mat-label>
+                            <mat-select [disabled]="cinfoUpdateForm.controls.domain.disabled" formControlName="domain" [(ngModel)]="jobRecruiterProfile.domain">
+                                <mat-option value="SOFTWARE">SOFTWARE</mat-option>
+                                <mat-option value="ANALYTICS">ANALYTICS</mat-option>
+                                <mat-option value="FINANCE">FINANCE</mat-option>
+                                <mat-option value="AUTOMOBILE">AUTOMOBILE</mat-option>
+                                <mat-option value="CONSTRUCTION">CONSTRUCTION</mat-option>
+                                <mat-option value="STEEL">STEEL</mat-option>
+                                <mat-option value="PHARMA">PHARMA</mat-option>
+                                <mat-option value="OTHERS">OTHERS</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+
+                        <div fxLayout="row" *ngIf="!disabled" fxLayout.lt-sm="column" fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+                            <button mat-raised-button color="primary" type="submit" [disabled]="!cinfoUpdateForm.valid">Save</button>
+                            <button mat-raised-button type="button" (click)="onEditCancel()">Cancel</button>
+                        </div>
+                    </form>
+                </mat-card-content>
+                </div>
+
+            <div>
+                <button mat-icon-button (click)="onEditClick()">
+                    <mat-icon>create</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-card>
+        </div>
+
+        </div>
+    </div>
+</div>
+</section>
+
+<app-footer></app-footer>
+<router-outlet></router-outlet>

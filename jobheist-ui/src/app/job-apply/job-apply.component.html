@@ -1,0 +1,112 @@
+<div fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="space-between">
+  <mat-card-title class="jobTitle">{{job.jobTitle | titlecase }} at {{job.organisation | titlecase}}</mat-card-title>
+  <button matTooltip="close" mat-icon-button  (click)="cancel()"><mat-icon>clear</mat-icon></button>
+</div>
+<div fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="space-between">
+    <button mat-raised-button color="primary" *ngIf="show" (click)="apply()">APPLY NOW!</button>
+    <button mat-raised-button color="primary" *ngIf="!show" [disabled]="true">APPLIED</button>
+</div>
+
+
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Details">
+        <div fxLayout="column">
+            <mat-card>
+              <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                <mat-card class="field">Job Title</mat-card>
+                <mat-card class="value">{{job.jobTitle | titlecase}}</mat-card>
+              </div>
+            </mat-card>
+        
+            <mat-card>
+              <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                <mat-card class="field">Job Description</mat-card>
+                <mat-card class="value">{{job.jobDescription}}</mat-card>
+              </div>
+            </mat-card>
+        
+            <mat-card>
+              <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                <mat-card class="field">Working Location</mat-card>
+                <mat-card class="value">{{job.workingLocation | titlecase}}</mat-card>
+              </div>
+            </mat-card>
+        
+            <mat-card>
+              <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                <mat-card class="field">Salary Range</mat-card>
+                <mat-card class="value">{{job.salary.minValue | currency:'INR'}} - {{job.salary.maxValue | currency:'INR'}}</mat-card>
+              </div>
+            </mat-card>
+          </div>
+
+    </mat-tab>
+
+    <mat-tab label="Profile">
+        <div fxLayout="column">
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                  <mat-card class="field">Total experience</mat-card>
+                  <mat-card class="value">{{job.candidateProfile.totalExperience.minValue}} - {{job.candidateProfile.totalExperience.maxValue}} years</mat-card>
+                </div>
+              </mat-card>
+              
+              <mat-card>
+                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                  <mat-card class="field">Domains</mat-card>
+                  <mat-card class="value"> 
+                    <mat-chip-list  aria-label="Color selection">
+                      <div *ngFor="let item of job.candidateProfile.domains">
+                          <mat-chip  selected color="accent" >
+                            {{item}}
+                          </mat-chip>
+                      </div>
+                    </mat-chip-list>
+                  </mat-card>
+                </div>
+              </mat-card>
+          
+              <mat-card>
+                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                  <mat-card class="field">Roles</mat-card>
+                  <mat-card class="value"> 
+                    <mat-chip-list  aria-label="Color selection">
+                      <div *ngFor="let item of job.candidateProfile.roles">
+                          <mat-chip  selected color="accent" >
+                            {{item}}
+                          </mat-chip>
+                      </div>
+                    </mat-chip-list>
+                  </mat-card>
+                </div>
+              </mat-card>
+              
+              <mat-card>
+                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                  <mat-card class="field">Skills</mat-card>
+                  <mat-card class="value"> 
+                    <mat-chip-list  aria-label="Color selection">
+                      <div *ngFor="let skill of job.candidateProfile.skill">
+                        <div [ngSwitch]="skill.proficiencyLevel">
+                          <mat-chip  selected color="accent" matTooltip="Basic" *ngSwitchCase="'BASIC'">
+                            {{skill.skill}}
+                          </mat-chip>
+                          <mat-chip  selected color="primary" matTooltip="Intermediate" *ngSwitchCase="'INTERMEDIATE'">
+                            {{skill.skill}}
+                          </mat-chip>
+                          <mat-chip  selected color="warn" matTooltip="Advanced" *ngSwitchCase="'ADVANCED'">
+                            {{skill.skill}}
+                          </mat-chip>
+                        </div>
+                        
+                      </div>
+                      
+                    </mat-chip-list>
+                  </mat-card>
+                </div>
+              </mat-card>
+        
+        </div>
+    </mat-tab>
+    </mat-tab-group>
+

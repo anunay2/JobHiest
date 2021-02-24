@@ -1,0 +1,72 @@
+<div fxLayout="column" fxLayoutAlign="center" >
+      <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="3%" fxLayoutGap.lt-sm="1%">
+        
+        <table >
+          <caption>Skills</caption> 
+          
+        
+          <tr *ngFor="let skill of skillsList">
+              <td id="skillName">{{skill.skill}}</td>
+              <td id="proficiency">{{skill.profiencyLevel}}</td>
+              <td> <button mat-icon-button (click)="onDeletingSkill(skill.skill)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+              </td>
+          </tr>
+          
+      </table>
+
+        
+      </div>
+      <div>
+      <form class="info-form" [formGroup]="skillsForm" (ngSubmit)="saveSkills()">
+        <div fxLayout="row">
+        <mat-form-field  appearance="outline" *ngIf="newSkill">
+            <mat-label>Add new skill</mat-label>
+            <input matInput formControlName="skill" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+    
+        <mat-form-field  appearance="outline" *ngIf="newSkill">
+            <mat-label>Proficiency</mat-label>
+            <mat-select formControlName="profiencyLevel">
+                <mat-option value="BASIC">BASIC</mat-option>
+                <mat-option value="INTERMEDIATE">INTERMEDIATE</mat-option>
+                <mat-option value="ADVANCED">ADVANCED</mat-option>
+            </mat-select>
+          </mat-form-field>
+         
+            <button mat-icon-button *ngIf="skillsForm.valid" color="default" 
+            type="button" (click)="addConfirm()" id="confirm">
+              <mat-icon>check</mat-icon>
+            </button>
+            <button mat-icon-button (click)="clearSkill()" *ngIf="newSkill" id="clear">
+              <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="flex-end"  >
+          <div id="hint" >
+            <mat-hint *ngIf="!newSkill">
+            
+              {{emptyMessage}}
+  
+            </mat-hint>
+          </div>
+          <div >
+            <button mat-icon-button (click)="addSkill()" *ngIf="!newSkill" >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+          <button mat-raised-button color="primary" type="submit">Save</button>
+          <button mat-raised-button color="default" type="button" (click)="cancel()">Cancel</button>
+          </div>
+    </form>
+
+    
+</div>

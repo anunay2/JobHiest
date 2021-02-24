@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div fxLayoutAlign="center center" fxFlexfill class="main-div">
+    <mat-card fxFlex="45">
+      <mat-toolbar color="primary">Register With Us</mat-toolbar>
+       <span id="errmsg">{{msg}}</span>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="register-form"[formGroup]="registerForm" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+        <mat-form-field>
+            <input id="userName"
+                   matInput 
+                   placeholder="Username"  
+                   formControlName="userName"
+                   [(ngModel)]="user.username" />
+          </mat-form-field>
+        
+        <mat-form-field>
+          <input id="emailId"
+                 matInput 
+                 placeholder="Email Id"  
+                 formControlName="emailId"
+                 [(ngModel)]="user.emailid" />
+        </mat-form-field>
+      
+        <mat-form-field>
+          <input id="password" 
+                 matInput 
+                 type="password" 
+                 placeholder="Password"
+                 formControlName="password"
+                 [(ngModel)]="user.password"
+                 [type]="hide ? 'password':'text'" />
+                 <mat-icon matSuffix (click)="hide = !hide">
+                    {{hide ? 'visibility' : 'visibility_off'}}
+                 </mat-icon>
+        </mat-form-field>
+        <button mat-raised-button type="submit" color="primary" class="btn-class " [disabled]="!registerForm.valid">Register</button>
+        <h3>Already a User? Login <a routerLink="/login">here</a></h3>
+      </form>
+    </mat-card>
+  </div>
+ 
+<app-footer></app-footer>
+<router-outlet></router-outlet>

@@ -1,0 +1,81 @@
+
+
+.hire-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  td {
+    padding-right: 8px;
+  }
+  .align-center{
+    margin: auto;
+    display: block;
+  }
+  
+  .full-card{
+  margin-top: 10px;
+  border-radius: 10px;
+  min-width: 150px;
+  max-width: 500px;
+  }
+ .chip-list {
+    width: 100%;
+  }
+
+  .example-action-buttons {
+    padding-bottom: 20px;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-title,
+  .example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .example-headers-align .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  mat-form-field {
+    margin-right: 12px;
+  }
+  
+  .title-center {
+    flex: 1 1 auto;
+    font-size: 20px;
+    /* margin-left: 45%; */
+    justify-content: center;
+   
+  } 
+  .bgcol{
+      background-color:rgb(201, 196, 196);
+  }
+
+  p{
+    color: red;
+  }
+
+  .step-next{
+    float: right;
+  }
+
+.stepper{
+  margin: auto;
+  max-width: 700px;
+}
+
+.step-previous{
+  float: left;
+}
+ 
+  

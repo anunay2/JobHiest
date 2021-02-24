@@ -1,0 +1,125 @@
+<div fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="space-between">
+    <mat-card-title >{{jobSeekerProfile.name | titlecase }} </mat-card-title>
+    <button matTooltip="close" mat-icon-button  (click)="cancel()"><mat-icon>clear</mat-icon></button>
+  </div>
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="About">
+        <div fxLayout="column">
+            <mat-card>
+              <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                <mat-card class="field">Name</mat-card>
+                <mat-card class="value">{{jobSeekerProfile.name | titlecase}}</mat-card>
+              </div>
+            </mat-card>
+        
+            <mat-card>
+              <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                <mat-card class="field">Email id</mat-card>
+                <mat-card class="value">{{jobSeekerProfile.email}}</mat-card>
+              </div>
+            </mat-card>
+        
+            <mat-card>
+              <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                <mat-card class="field">Date of birth</mat-card>
+                <mat-card class="value">{{jobSeekerProfile.dob | date}}</mat-card>
+              </div>
+            </mat-card>
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                  <mat-card class="field">Current Location</mat-card>
+                  <mat-card class="value">{{jobSeekerProfile.currentLocation | titlecase}}</mat-card>
+                </div>
+              </mat-card>
+          
+              <mat-card>
+                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                  <mat-card class="field">Preferred Location</mat-card>
+                  <mat-card class="value">{{jobSeekerProfile.preferredLocation | titlecase}}</mat-card>
+                </div>
+              </mat-card>
+
+          </div>
+
+    </mat-tab>
+    <mat-tab label="Skills">
+        <div fxLayout="column">
+                <mat-card>
+                    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                      <mat-card class="field">Skills</mat-card>
+                      <mat-card class="value"> 
+                        <mat-chip-list  aria-label="Color selection">
+                          <div *ngFor="let skill of jobSeekerProfile.skills">
+                            <div [ngSwitch]="skill.profiencyLevel">
+                              <mat-chip  selected color="accent" matTooltip="Basic" *ngSwitchCase="'BASIC'">
+                                {{skill.skill}}
+                              </mat-chip>
+                              <mat-chip  selected color="primary" matTooltip="Intermediate" *ngSwitchCase="'INTERMEDIATE'">
+                                {{skill.skill}}
+                              </mat-chip>
+                              <mat-chip  selected color="warn" matTooltip="Advanced" *ngSwitchCase="'ADVANCED'">
+                                {{skill.skill}}
+                              </mat-chip>
+                            </div>
+                            
+                          </div>
+                          
+                        </mat-chip-list>
+                      </mat-card>
+                    </div>
+                  </mat-card>
+
+                  <mat-card>
+                    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                      <mat-card class="field">Projects</mat-card>
+                      <mat-card class="value"> 
+                        <mat-chip-list  aria-label="Color selection">
+                          <div *ngFor="let experience of jobSeekerProfile.experiences">
+                              <mat-chip  selected color="accent" [matTooltip]='experience.organisation'>
+                                {{experience.project}}
+                              </mat-chip>
+                          </div>
+                        </mat-chip-list>
+                      </mat-card>
+                    </div>
+                  </mat-card>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Experience">
+        <div fxLayout="column">
+            <div *ngFor="let experience of jobSeekerProfile.experiences">
+                <mat-card>
+                    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                      <mat-card class="field">{{experience.organisation}}</mat-card>
+                      <mat-card class="value">
+                          {{experience.role}}
+                          <br>
+                          {{experience.startDate | date}} - {{experience.endDate | date}}
+                        </mat-card>
+                    </div>
+                  </mat-card>
+            </div>
+            
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Education">
+        <div fxLayout="column">
+            <div *ngFor="let education of jobSeekerProfile.educations">
+                <mat-card>
+                    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+                      <mat-card class="field">{{education.school}}</mat-card>
+                      <mat-card class="value">
+                          {{education.degree}} in {{education.field}}
+                          <br>
+                          {{education.startyear}} - {{education.endyear}}
+                        </mat-card>
+                    </div>
+                  </mat-card>
+            </div>
+            
+        </div>
+    </mat-tab>
+
+    </mat-tab-group>

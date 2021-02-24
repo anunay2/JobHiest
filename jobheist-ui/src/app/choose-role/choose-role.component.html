@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<mat-toolbar-row class="bgcol">
+    <span class="title-center">Choose Your Role</span>
+  </mat-toolbar-row>
+
+<div class="container" fxLayout="row" fxLayoutGap="33%" fxLayoutAlign="center center"  fxLayout.lt-md="column" fxLayoutGap.lt-md="-5%">
+<div fxLayout="column" fxLayoutAlign="center center">
+<button mat-raised-button type="submit" (click)="hire()" color="primary">Hire</button>
+</div>
+<div  fxLayout="column" fxLayoutAlign="center center" >
+<button mat-raised-button type="submit" (click)="gethired()" color="primary">Get Hired</button>
+</div>
+</div>
+
+<app-footer></app-footer>
+<router-outlet></router-outlet>

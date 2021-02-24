@@ -1,0 +1,359 @@
+version: '3.3'
+
+services:
+
+  eureka-server:
+    build: eureka-server/
+    container_name: eureka-server
+    restart: always
+    hostname: localhost
+    network_mode: host
+    volumes:
+      - ../jobheist-data/logs:/usr/src/logs
+    ports:
+      - 8085:8085
+
+
+  config-server:
+    build: config-server/
+    container_name: config-server
+    restart: always
+    hostname: localhost
+    volumes:
+      - ../jobheist-data/logs:/usr/src/logs
+    network_mode: host
+    ports:
+      - 8888:8888
+
+  api-gateway:
+    build: api-gateway/
+    container_name: api-gateway
+    depends_on:
+      - config-server
+      - eureka-server
+    restart: always
+    volumes:
+      - ../jobheist-data/logs:/usr/src/logs
+    hostname: localhost
+    network_mode: host
+    ports:
+      - 8080:8080
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    hostname: localhost
+    network_mode: host
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: shubhammcredentialdb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: example
+    ports:
+      - 3306:3306
+    hostname: localhost
+    network_mode: host
+    volumes:
+      - '../jobheist-data/sql-data:/var/lib/mysql'
+
+
+#  mongo:
+#    image: mongo:latest
+#    # environment:
+#    #   MONGO_INITDB_ROOT_USERNAME: root
+#    #   MONGO_INITDB_ROOT_PASSWORD: rootpassword
+#    restart: always
+#    ports:
+#      - 27017:27017
+#    hostname: localhost
+#    network_mode: host
+#    volumes:
+#      - '../jobheist-data/mongo-data:/data/db'
+#
+#  redis:
+#    image: redis
+#    restart: always
+#    ports:
+#    - 6379:6379
+#    hostname: localhost
+#    network_mode: host
+#
+#  neo4j :
+#    image : neo4j:latest
+#    restart: always
+#    environment:
+#      NEO4J_AUTH: none
+#    ports :
+#      -  7474:7474
+#      -  7687:7687
+#    hostname: localhost
+#    network_mode: host
+#    volumes :
+#      - '../jobheist-data/neo4j-data:/data'
+
+#  job-indexing:
+#    build: indexing-service/job-indexing/
+#    container_name: job-indexing
+#    depends_on:
+#      - mongo
+#      - neo4j
+#      - zipkin
+#      - config-server
+#
+#    restart: always
+#    volumes:
+#      - ../jobheist-data/logs:/usr/src/logs
+#    ports:
+#      - 8020:8020
+#    hostname: localhost
+#    network_mode: host
+
+
+
+
+  authentication-service:
+    build: authentication-service/
+    container_name: authentication-service
+    depends_on:
+      - rabbitmq
+      - db
+#      - zipkin
+      - config-server
+    restart: always
+    volumes:
+      - ../jobheist-data/logs:/usr/src/logs
+    network_mode: host
+    hostname: localhost
+    ports:
+      - 8015:8015
+
+  jobprofile-service:
+    build: jobprofile-service/
+    container_name: jobprofile-service
+    restart: always
+    depends_on:
+      - rabbitmq
+#      - mongo
+#      - zipkin
+      - config-server
+    network_mode: host
+    volumes:
+      - ../jobheist-data/logs:/usr/src/logs
+    hostname: localhost
+    ports:
+      - 8030:8030
+#
+#  profile-indexing:
+#    build: indexing-service/profile-indexing/
+#    container_name: profile-indexing
+#    depends_on:
+#      - rabbitmq
+#      - neo4j
+#      - zipkin
+#      - config-server
+#    restart: always
+#    network_mode: host
+#    volumes:
+#      - ../jobheist-data/logs:/usr/src/logs
+#    hostname: localhost
+#    ports:
+#      - 8025:8025
+#
+#  experience-processing:
+#    build: processing-service/experience-processing/
+#    container_name: experience-processing
+#    restart: always
+#    depends_on:
+#      - rabbitmq
+#      - zipkin
+#      - config-server
+#    network_mode: host
+#    volumes:
+#      - ../jobheist-data/logs:/usr/src/logs
+#    hostname: localhost
+#    ports:
+#      - 8035:8035
+#
+#  personal-information-processing:
+#    build: processing-service/personal-information-processing/
+#    container_name: personal-information-processing
+#    restart: always
+#    depends_on:
+#      - rabbitmq
+#      - zipkin
+#      - config-server
+#      - api-gateway
+#    network_mode: host
+#    volumes:
+#      - ../jobheist-data/logs:/usr/src/logs
+#    hostname: localhost
+#    ports:
+#      - 8040:8040
+#
+#  skill-processing:
+#    build: processing-service/skill-processing/
+#    container_name: skill-processing
+#    restart: always
+#    depends_on:
+#      - rabbitmq
+#      - redis
+#      - zipkin
+#      - config-server
+#      - api-gateway
+#    network_mode: host
+#    volumes:
+#      - ../jobheist-data/logs:/usr/src/logs
+#    hostname: localhost
+#    ports:
+#      - 8045:8045
+#
+#  jobrecruiterprofile-service:
+#    build: jobrecruiterprofile-service/
+#    container_name: recruiter-profile
+#    restart: always
+#    depends_on:
+#      - rabbitmq
+#      - mongo
+#      - zipkin
+#      - config-server
+#      - api-gateway
+#    network_mode: host
+#    volumes:
+#      - ../jobheist-data/logs:/usr/src/logs
+#    hostname: localhost
+#    ports:
+#      - 8111:8111
+#
+#  query-engine:
+#    build: query-engine/
+#    restart: always
+#    depends_on:
+#      - neo4j
+#      - zipkin
+#      - mongo
+#      - config-server
+#      - api-gateway
+#    network_mode: host
+#    volumes:
+#      - ../jobheist-data/logs:/usr/src/logs
+#    hostname: localhost
+#    ports:
+#      - 8050:8050
+#
+#  zipkin:
+#    image: openzipkin/zipkin
+#    container_name: zipkin
+#    restart: always
+#    network_mode: host
+#    hostname: localhost
+#    ports:
+#      - 9411:9411
+
+#
+#  jobheist-ui:
+#    build: jobheist-ui/
+#    container_name: jobheist-ui
+#    restart: always
+#    network_mode: host
+#    hostname: localhost
+#    ports:
+#      - 4200:4200
+#    command: >
+#        bash -c "npm install && npm install -g @angular/cli@10.1.4 && ng serve --host 0.0.0.0 --port 4200"
+#
+
+#  prometheus:
+#    image: prom/prometheus:latest
+#    restart: always
+#    network_mode: host
+#    hostname: localhost
+#    volumes:
+#      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+#    ports:
+#      - 9090:9090
+#
+#  grafana:
+#    image: grafana/grafana
+#    restart: always
+#    network_mode: host
+#    hostname: localhost
+#    ports:
+#      - 3000:3000
+#    volumes:
+#      - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+#    depends_on:
+#      - prometheus
+
+
+  elasticsearch:
+    image:  docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    volumes:
+      - type: bind
+        source: ./config/elastic.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+    #      - type: volume
+    #        source: elasticsearch
+    #        target: /usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx1g -Xms1g"
+      ELASTIC_PASSWORD: password
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks
+      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      discovery.type: single-node
+  # commented the logstash service, because we are using elasticsearch bulk api
+  # to post data to elk
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.6.1
+
+    volumes:
+      - type: bind
+        source: ./config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./config/logstash.conf
+        target: /usr/share/logstash/pipeline/logstash.conf
+        read_only: true
+      - type: bind
+        source: ../jobheist-data/logs
+        target:  /usr/share/logstash/pipeline/logs
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx1g -Xms1g"
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.6.1
+    volumes:
+      - type: bind
+        source: ./config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+
+
+
+
+   
+  
+

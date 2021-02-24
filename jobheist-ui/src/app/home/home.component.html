@@ -1,0 +1,148 @@
+<app-navbar *ngIf="notLogged"></app-navbar>
+<app-profile-navbar *ngIf="isSeeker"></app-profile-navbar>
+<app-navbar-profile-recruiter *ngIf="isRecruiter"></app-navbar-profile-recruiter>
+<!-- hero unit -->
+
+<section id="cover">
+    <div class="container" fxLayout="column" id="cover-caption">
+        <div class="mat-display-3" fxFlexAlign="center">500+ DEVELOPERS PLACED</div>
+        <div class="mat-title" fxFlexAlign="center">We are the bridge connecting you to your dream job
+            <p>10000+ Jobs. Find Better, Find Faster</p>
+        </div>
+        <div fxLayoutGap="15px" fxLayout="column">
+            <button mat-raised-button class="getstarted" fxFlexAlign="center" (click)="hire()">Hire</button>
+            <button mat-raised-button class="getstarted" fxFlexAlign="center" (click)="gethired()">Get Hired</button>
+        </div>
+        <!-- <button mat-raised-button fxFlexAlign="center" routerLink="/choose">Get Started</button> -->
+        <!-- <button mat-raised-button fxFlexAlign="center" routerLink="/hire">Go To hire</button>
+        <button mat-raised-button fxFlexAlign="center" routerLink="/dashboard">dashboard</button> -->
+
+    </div>
+</section>
+
+<!-- <mat-divider></mat-divider> -->
+
+<!--The Publication section-->
+<section class="backgroundcol">
+    <div class="container" fxLayout="column">
+        <div class="mat-headline pubhead" fxFlexAlign="center">The Publication</div>
+        <div class="mat-body-1" fxHide.lt-sm id="publication_content"> 
+            Job Heist offers thousands of the latest job listings, combined with a growing database of company reviews, filtered job recommendations, 
+            CEO approval ratings, salary reports, interview reviews and questions, benefits reviews, office photos and more.</div>
+        <div class="news_company" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
+            <div fxLayout="row" fxFlexAlign="center">
+                <button class="btn17"></button>
+                <button class="btn18"></button>
+            </div>
+            <div fxLayout="row" fxFlexAlign="center">
+                <button class="btn19"></button>
+                <button class="btn20"></button>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<mat-divider></mat-divider>
+<section class="backgroundcol">
+    <div class="container">
+        <div class="mat-display-1" id="jobseeker" fxLayoutAlign="center">Are you a Job seeker or a Recruiter ?</div>
+        <div class="mat-title" fxLayoutAlign="center">Hear what they say about us!</div>
+        <div fxLayout.lt-md="column" fxLayout="row">
+            <div fxLayout.lt-sm="row" fxLayoutAlign.lt-sm="center" fxFlex="100" fxLayoutAlign="center">
+                <mat-card>
+                    <!-- <img mat-card-image src="../" alt="testimonial img" height="250vh" width="150vw"> -->
+                    <img src="./assets/images/download (3).jpg" height="150vh" width="250vw">
+                    <br><br>
+                    <div class="mat-card-content"><em>"It has been a very satisfying experience using JobHeist .
+                        We gladly acknowledge your timely help and support in sourcing suitable candidates according to given specifications, as and when required.
+                         Our experience of using JobHeist a happy and fruitful one and will continue to hire through JobHeist."</em></div>
+                    <mat-card-actions><button class="mat-button">- <b> Natasha Vaz, Lowe's India </b>
+                    </button></mat-card-actions>
+                </mat-card>
+            </div>
+            <div fxLayout.lt-sm="row" fxLayoutAlign.lt-sm="center" fxFlex="100" fxLayoutAlign="center">
+                <mat-card>
+                    <!-- <img mat-card-image src="src\assets\images\download (2).jpg" alt="testimonial img" height="250vh" width="250vw"> -->
+                    <img src="../assets/images/08f772304c2baaa8e7c2f6c028d2a740.jpg" height="150vh" width="250vw">
+                    <br><br>
+                    <div class="mat-card-content"><em>"I was looking for a job according to my skillsets. 
+                         Most of the other job sites flooded with jobs that is out of my domain.
+                         But after registering to Job Heist, searching for job has been so easy and their recommendation system is the best. 
+                         I am placed at my dream company and all thanks to Job Heist."</em></div>
+                    <mat-card-actions><button class="mat-button">- <b>Sanjay Sahoo, Mentor Graphics</b></button></mat-card-actions>
+                </mat-card>
+            </div>
+            <div fxLayout.lt-sm="row" fxLayoutAlign.lt-sm="center" fxFlex="100" fxLayoutAlign="center">
+                <mat-card>
+                    <!-- <img mat-card-image src="" alt="testimonial img" height="250vh" width="250vw"> -->
+                    <img src="../assets/images/confident-smiling-indian-young-business-woman-student-sales-professional-office-employee-hr-teacher-india-standing-arms-192389177.jpg" height="150vh" width="250vw">
+                    <br><br>
+                    <div class="mat-card-content"> <em>" I am writing this to express my gratitude to the JobHeist who helped me successfully apply and secure for the role of Technical Consultant in Payapal. 
+                        If you are looking for handpicked jobs that suits your profile then you are at the right place."</em></div>
+                        <br><br>
+                    <mat-card-actions><button class="mat-button">-<b>Sakshi Makhija, Paypal India</b></button></mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br>
+<mat-divider></mat-divider>
+
+
+<!--Companies that trust us (Hall of fame)-->
+
+<section class="backgroundcol">
+    <div class="mat-display-1" id="companies" fxLayoutAlign="center">Companies that trust us:</div>
+    <div class="container allcompanies" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
+        <div fxLayout.lt-sm="row" fxFlexAlign="center" fxLayout="column">
+            <button class="btn1"></button>
+            <button class="btn2"></button>
+            <button class="btn3"></button>
+            <div fxHide.lt-sm><button class="btn4"></button></div>
+        </div>
+        <div fxLayout.lt-sm="row" fxFlexAlign="center" fxLayout="column">
+            <button class="btn5"></button>
+            <button class="btn6"></button>
+            <button class="btn7"></button>
+            <div fxHide.lt-sm><button class="btn8"></button></div>
+        </div>
+        <div fxLayout.lt-sm="row" fxFlexAlign="center" fxLayout="column">
+            <button class="btn9"></button>
+            <button class="btn10"></button>
+            <button class="btn11"></button>
+            <div fxHide.lt-sm><button class="btn12"></button></div>
+        </div>
+        <div fxLayout.lt-sm="row" fxFlexAlign="center" fxLayout="column">
+            <button class="btn13"></button>
+            <button class="btn14"></button>
+            <button class="btn15"></button>
+            <div fxHide.lt-sm><button class="btn16"></button></div>
+        </div>
+    </div>
+</section>
+<br>
+<mat-divider></mat-divider>
+
+<!--register with us content-->
+<section  class="backgroundcol ">
+    <div class="container" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.lt-md="column">
+        <div fxLayout="column">
+           <span class="mat-display-1 ready"><strong>Ready to get started?</strong></span>
+           <span class="mat-display-1 ready">Sign up or contact us</span>
+        </div>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px" fxLayoutGap.gt-md="0">
+            <button class="mat-raised-button" id="registerbutton" (click)="goUp()" >Register Now</button>
+            <button class="mat-raised-button" id="contactusbutton" >Contact Us</button>
+            
+        </div>
+        </div>
+</section>
+<br>
+<div fxLayoutAlign="end">
+    <mat-icon matTooltip="Go Straight Up" (click)="goUp()">keyboard_arrow_up</mat-icon>
+</div>
+<app-footer></app-footer>
+<router-outlet></router-outlet>
+

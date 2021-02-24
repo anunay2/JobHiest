@@ -1,0 +1,244 @@
+/* all */
+html,body{
+    height:100%;
+    text-align: center;
+}
+
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.backgroundcol{
+    background-color: white;
+    margin-top: 2rem;
+}
+
+/* herounit */
+#cover{
+    background: #222 url("src\assets\images\andrew-neel-cckf4TsHAuw-unsplash.jpg") no-repeat;
+    background-size: cover;
+    color:white;
+    height: 600px;
+    text-align: center;
+    display:flex;
+    align-items: center;
+    align-content: center;
+}
+#cover-caption{
+    width: 100%;
+}
+
+/* The Publication section */
+
+#publication_content{
+    margin: 0 10% 2% 10%;
+    text-align: center;
+    font-size: 15px;
+}
+.pubhead{
+    font-size: 34px;
+}
+
+.news_company button{
+    height: 58px;
+    width: 96px;
+    margin: 1rem 2rem 1rem 2rem;
+    border-style: none;
+}
+
+
+
+/* Are you a job seeker */
+#jobseeker{
+    margin: 0;
+}
+
+.mat-card{
+    max-width: 250px;
+    margin: 1rem 0 1rem 0;
+}
+
+/* Companies that trust us (Hall of fame) */
+
+#companies{
+    margin: 0 0 1rem 0;
+}
+
+.allcompanies button{
+    height: 48px;
+    width: 96px;
+    margin: 1rem 2rem 1rem 2rem;
+    border-style: none;
+}
+
+.btn1{
+    background-image: url("src\assets\images\axis 1.png");
+    width:40px; 
+    height:40px; 
+    border: 0;
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn2{
+    background-image: url("src\assets\images\zs 7.png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn3{
+    background-image: url("src\assets\images\amazon_logo_a_l.jpg");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+    
+    
+}
+
+.btn4{
+    background-image: url("src\assets\images\lowe 6.png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+    
+}
+
+.btn5{
+    background-image: url("src\assets\images\download (7).png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn6{
+    background-image: url("src\assets\images\infy 5.png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn7{
+    background-image: url("src\assets\images\goole 16.png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn8{
+    background-image: url("src\assets\images\mentor 8.png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn9{
+    background-image: url("src\assets\images\download (4).png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn10{
+    background-image: url("src\assets\images\Uber-Asset-Logo-33.jpg");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn11{
+    background-image: url("src\assets\images\download (6).png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn12{
+    background-image: url("src\assets\images\l&t 12.png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn13{
+    background-image: url("src\assets\images\microsoft 13.png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn14{
+    background-image: url("src\assets\images\steel 15.png");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn15{
+    background-image: url("src\assets\images\cgi 14.jpg");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+
+.btn16{
+    background-image: url("src\assets\images\images.jpg");
+    background-size: 100%; 
+    background-size: 96px 48px;
+    background-repeat: no-repeat; 
+}
+.btn17{
+    background-image: url("src\assets\images\images (5).jpg");
+    background-size: 100%; 
+    background-size: 96px 58px;
+    background-repeat: no-repeat; 
+}
+
+.btn18{
+    background-image: url("src\assets\images\images (3).jpg");
+    background-size: 100%; 
+    background-size: 96px 58px;
+    background-repeat: no-repeat; 
+}
+.btn19{
+    background-image: url("src\assets\images\images (2).jpg");
+    background-size: 100%; 
+    background-size: 96px 58px;
+    background-repeat: no-repeat; 
+}
+.btn20{
+    background-image: url("src\assets\images\images (1).png");
+    background-size: 100%; 
+    background-size: 96px 58px;
+    background-repeat: no-repeat; 
+}
+/* register with us content */
+.ready{
+    margin:0.5rem 0 0.5rem 0;
+}
+
+#registerbutton{
+    background-color: black;
+    color: white;
+    margin: 0 0.5rem 0 0.5rem;
+}
+
+#contactusbutton{
+    background-color: #eefbfb;
+    color: black;
+    margin: 0 0.5rem 0 0.5rem;
+}
+
+/* divider */
+
+.mat-divider{
+    height: 10px;
+    background-color:white;
+    
+}
+
+.getstarted:hover{
+    padding: 10px;
+    font-size: 30px;
+}

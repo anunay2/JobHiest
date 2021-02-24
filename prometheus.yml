@@ -1,0 +1,81 @@
+global:
+    scrape_interval:     15s
+
+scrape_configs:
+- job_name: 'prometheus'
+  scrape_interval: 5s
+
+  static_configs:
+    - targets: ['localhost:9090']
+
+- job_name: 'api-gateway'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8080']
+
+- job_name: 'authentication-service'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8015']
+
+- job_name: 'config-server'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8888']
+
+- job_name: 'eureka-server'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8085']
+
+- job_name: 'job-indexing'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8020']
+
+- job_name: 'profile-indexing'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8025']
+
+- job_name: 'jobprofile'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8030']
+
+- job_name: 'jobrecruiterprofile'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8111']
+
+- job_name: 'experience-processing'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8035']
+
+- job_name: 'personal-information-processing'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8040']
+
+- job_name: 'skill-processing'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8045']
+
+- job_name: 'query-engine'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:8050']

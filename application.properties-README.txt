@@ -1,0 +1,42 @@
+########## API-GATEWAY ##########
+
+server.port=8080
+eureka.client.serviceUrl.defaultZone=http://localhost:8085/eureka/
+eureka.client.registerWithEureka=true
+eureka.instance.preferIpAddress=true
+#ribbon.eureka.enabled=false
+spring.application.name=zuul
+
+/* eg. for microservice A with "server.port=8070" and "spring.application.name=profile" */
+zuul.routes.profile.url=http://localhost:8070
+/* eg. for microservice B with "server.port=8090" and "spring.application.name=user" */
+zuul.routes.profile.url=http://localhost:8070
+
+########## CONFIG-SERVER ##########
+
+server.port=8888
+spring.cloud.config.server.git.uri=https://gitlab-cgi.stackroute.in/cgi-core-wave1/jobheist-configuration
+
+########## services requesting config files from config server ##########
+
+server.port=8001
+spring.cloud.config.uri=http://localhost:8888
+
+########## EUREKA-SERVER ###########
+
+server.port=8085
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+spring.application.name=eureka
+logging.level.com.netflix.eureka=OFF
+logging.level.com.netflix.discovery=OFF
+
+########## services registering themselves with eureka-server ##########
+
+/* eg. for microservice C with "server.port=8010" and "spring.application.name=car" */
+
+server.port=8010
+spring.application.name=car
+eureka.client.service-url-defaultZone=http://localhost:8085/eureka
+eureka.client.register-with-eureka=true
+eureka.client.fetch-registry=true

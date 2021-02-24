@@ -1,0 +1,15 @@
+{  "/authentication/*":
+     {    "target": "http://localhost:8080",    "secure": false  },
+     
+     "/job-indexing/*":
+     {    "target": "http://localhost:8080",    "secure": false  },
+     
+     "/jobprofile/*":
+     {    "target": "http://localhost:8080",    "secure": false  },
+
+     "profile-indexing/*":
+     {    "target": "http://localhost:8080",    "secure": false  },
+
+     "query-engine/*":
+     {    "target": "http://localhost:8080",    "secure": false  }
+}

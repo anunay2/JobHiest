@@ -1,0 +1,55 @@
+<form class="info-form" [formGroup]="experienceForm" (ngSubmit)="onSaveExperience()">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Role</mat-label>
+      <input matInput formControlName="role" [(ngModel)]="experience.role">
+    </mat-form-field>
+
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Organisation Name</mat-label>
+      <input matInput formControlName="organisation" [(ngModel)]="experience.organisation">
+    </mat-form-field> <br>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Domain</mat-label>
+      <input matInput formControlName="domain" [matAutocomplete]="auto" [(ngModel)]="experience.domain">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+        </mat-option>
+    </mat-autocomplete>
+    </mat-form-field> 
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Responsibilities</mat-label>
+      <input matInput formControlName="responsibilities" [(ngModel)]="experience.responsibilities">
+    </mat-form-field> <br>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Project</mat-label>
+      <input matInput formControlName="project" [(ngModel)]="experience.project">
+    </mat-form-field> 
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput formControlName="startDate" [max]="maxDate" [matDatepicker]="picker" [(ngModel)]="experience.startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> <br>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>End Date</mat-label>
+        <input matInput formControlName="endDate" [max]="maxDate" [matDatepicker]="picker2" [(ngModel)]="experience.endDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field> 
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+    <button mat-raised-button color="primary" 
+    type="submit" [disabled]="!experienceForm.valid">Save</button>
+    <button mat-raised-button type="button"
+    (click)="cancelExperience()">Cancel</button>
+    <button mat-raised-button type="button" color="primary" *ngIf="old"
+    (click)="deleteExperience()">Delete</button>
+    </div>
+  </form>

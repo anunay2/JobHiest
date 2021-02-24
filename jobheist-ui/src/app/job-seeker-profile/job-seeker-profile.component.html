@@ -1,0 +1,226 @@
+<!-- Nav Bar-->
+<app-profile-navbar></app-profile-navbar>
+<mat-toolbar-row class="bgcol">
+  <span class="title-center">Hello Aspirant!!</span>
+</mat-toolbar-row>
+  
+<mat-divider></mat-divider>
+<section class="backgroundcol">
+    <div fxLayout="column" fxLayoutAlign="center" id="parent">
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="3%" fxLayoutGap.lt-sm="1%">
+        
+        <div fxLayout="column" fxLayoutAlign.lt-md="center" fxLayout.lt-md="row" fxLayoutGap="1%" fxLayoutGap.lt-sm="1%">
+          <mat-card class="example-card">
+            
+            <div mat-card-avatar *ngIf="initial.length !== 0" class="initials-image" [ngStyle]="{'background-color': circleColor }">
+              {{initial}}
+              
+            </div>
+            <div fxLayoutAlign="center">
+              <img *ngIf="initial.length === 0" src="./assets/images/johndoe.jpg" alt="">
+            </div>
+            
+            <mat-card-header class="profileHeader">
+                <mat-card-title class="profileTitle">{{jobSeekerProfile.name}}</mat-card-title>
+                <mat-card-subtitle class="profileSubtitle">{{jobSeekerProfile.email}}</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+
+          <mat-card class="example-card">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <div>
+            <mat-card-header>
+              <mat-card-title id="skillTitle">Skills</mat-card-title>
+            </mat-card-header>
+          
+                <mat-card-content>
+                  <!-- 
+                  <table >
+                    <tr *ngFor="let skill of skillsList">
+                        <td id="skillName">{{skill.skill}}</td>
+                        <td id="proficiency">{{skill.profiencyLevel}}</td>
+                    </tr>
+                    
+                </table> -->
+
+                <mat-chip-list  aria-label="Color selection">
+                  <div *ngFor="let skill of skillsList">
+                    <div [ngSwitch]="skill.profiencyLevel">
+                      <mat-chip  selected color="accent" matTooltip="Basic" *ngSwitchCase="'BASIC'">
+                            {{skill.skill}}
+                          </mat-chip>
+                          <mat-chip  selected color="primary" matTooltip="Intermediate" *ngSwitchCase="'INTERMEDIATE'">
+                            {{skill.skill}}
+                          </mat-chip>
+                          <mat-chip  selected color="warn" matTooltip="Advanced" *ngSwitchCase="'ADVANCED'">
+                            {{skill.skill}}
+                          </mat-chip>
+                    </div>
+                    
+                  </div>
+                  
+                </mat-chip-list>
+                 </mat-card-content>
+              
+                </div>
+            
+            <div id="edit-skills-button">
+              <button mat-icon-button (click)="onEditSkillsClick()">
+                <mat-icon>edit</mat-icon>
+              </button>
+              
+            </div>
+          </div>
+          </mat-card>
+
+
+        </div>
+        <div fxLayout="column" fxLayoutGap="0.001px" fxLayoutAlign="center" fxLayoutGap.lt-sm="0.001px">
+          
+          <div fxLayout="row" fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+            <mat-card class="example-card profile-card">
+              <div fxLayout="row" >
+                <div>
+                  <mat-card-title>Personal Information </mat-card-title>
+              <mat-card-content>
+                
+                  
+                    <form class="info-form" [formGroup]="infoUpdateForm" (ngSubmit)="onInfoEdit()">
+                      <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Email Id</mat-label>
+                        <input matInput formControlName="email" [(ngModel)]="jobSeekerProfile.email">
+                      </mat-form-field>
+
+                      <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" [(ngModel)]="jobSeekerProfile.name">
+                      </mat-form-field>
+                      
+                      <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Date of birth</mat-label>
+                        <input matInput formControlName="dob" [max]="maxDate" [matDatepicker]="picker" [(ngModel)]="jobSeekerProfile.dob">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker [disabled]="infoUpdateForm.controls.dob.disabled"></mat-datepicker>
+                      </mat-form-field>
+
+                      <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Current Location</mat-label>
+                        <input matInput formControlName="currentLocation" [(ngModel)]="jobSeekerProfile.currentLocation">
+                      </mat-form-field>
+
+                      <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Preferred Location</mat-label>
+                        <input matInput formControlName="preferredLocation" [(ngModel)]="jobSeekerProfile.preferredLocation">
+                      </mat-form-field>
+                      <div fxLayout="row" *ngIf="!disabled" fxLayout.lt-sm="column" fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+                      <button mat-raised-button color="primary" 
+                      type="submit" [disabled]="!infoUpdateForm.valid" >Save</button>
+                      <button mat-raised-button type="button"
+                      (click)="onEditCancel()">Cancel</button>
+                      </div>
+                    </form>
+               </mat-card-content>
+                </div>
+              <div>
+                <button mat-icon-button (click)="onEditClick()">
+                  <mat-icon>create</mat-icon>
+                </button>
+              </div>
+            </div>
+            </mat-card> 
+          </div>
+            
+          <div fxLayout="row" fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+            <mat-card class="example-card profile-card">
+              <div fxLayout="row" >
+                <div class="section-heading">
+                  <mat-card-title>Experience </mat-card-title>
+                  <mat-card-content>
+                      
+               </mat-card-content>
+                </div>
+                <div>
+                  <button mat-icon-button (click)="addExperience()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div fxLayout="column" *ngFor="let experience of experiencesList">
+                <mat-card>
+                <div fxLayout="row" >
+                  <div class="section-heading">
+                    <mat-card-title class="experience-role">{{experience.organisation}}</mat-card-title>
+                    <mat-card-subtitle>{{experience.role}} <br> {{experience.startDate | date}} - {{experience.endDate | date}}</mat-card-subtitle>
+                  </div>
+                  <div>
+                    <button mat-icon-button (click)="editExperience(experience.role,experience.organisation)" class="hiddenButton">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+
+
+                </div>
+                
+                  
+                </mat-card>
+                <mat-divider [inset]="true"></mat-divider>
+              </div>
+            </mat-card>
+          </div>
+
+          <div fxLayout="row"  fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+            <mat-card class="example-card profile-card">
+              <div fxLayout="row" >
+                <div class="section-heading">
+                  <mat-card-title>Education</mat-card-title>
+                  <mat-card-content>
+                      
+               </mat-card-content>
+                </div>
+                <div>
+                  <button mat-icon-button (click)="addEducation()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div fxLayout="column" *ngFor="let education of educationsList">
+                <mat-card>
+                <div fxLayout="row" >
+                  <div class="section-heading">
+                    <mat-card-title class="experience-role">{{education.school}}</mat-card-title>
+                    <mat-card-subtitle>{{education.degree}} {{education.field}}<br>
+                      {{education.startyear}} - {{education.endyear}}</mat-card-subtitle>
+                    
+                  </div>
+                  <div>
+                    <button mat-icon-button (click)="editEducation(education.degree)" class="hiddenButton">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+
+
+                </div>
+                
+                  
+                </mat-card>
+                <mat-divider [inset]="true"></mat-divider>
+              </div>
+            </mat-card>
+          </div>
+          <!--
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+            <button mat-raised-button color="primary">UPLOAD YOUR RESUME</button>
+            <button mat-raised-button color="primary">BUILD YOUR RESUME</button>
+          </div>
+        -->
+        
+        </div>
+         
+      </div>
+      
+    </div>
+</section>
+
+<app-footer></app-footer>

@@ -1,0 +1,66 @@
+
+
+<mat-toolbar  fxLayout="row" fxLayoutAlign="space-between" color="primary">
+  
+  <div fxShow fxHide.gt-sm fxLayout="row" fxLayoutAlign="center"><mat-button-toggle mat-icon-button #open><mat-icon>list</mat-icon></mat-button-toggle></div>
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="30px" fxHide.lt-md>
+    <div fxFlexAlign="center" class="nav-item" [routerLink]="['/']">
+      <a routerLink='/'>
+        <img src="../assets/images/logo new.jpg" class="logo-image">
+      </a>
+    </div>
+    <div fxFlexAlign="center" class="nav-item heist" [routerLink]="['/']">
+      <a routerLink='/'>JobHeist</a>
+    </div>
+    <div fxFlexAlign="center" class="nav-item">About Us</div> 
+    <div fxFlexAlign="center" class="nav-item">Service</div> 
+    <div fxFlexAlign="center" class="nav-item">Faq</div>    
+  </div>
+  <!-- <div fxLayout="row" fxLayoutAlign="center">
+      <button mat-button [routerLink]="['/']" class="nav-logo">Good Labour</button>
+    </div> -->
+    <div fxLayout="row">
+  
+    
+    <div >
+      <button mat-icon-button disableRipple [matMenuTriggerFor]="menu2" >
+        <div class="mat-card-avatar" [ngStyle]="{'background-color': circleColor }">
+          {{initial}}
+          <div *ngIf="initial.length === 0"><mat-icon>person</mat-icon></div>
+        </div>
+      </button>
+      
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item routerLink="/job-recruiter/all-postings">
+          <mat-icon>dashboard</mat-icon>
+          <span>My dashboard</span>
+        </button>
+        <button mat-menu-item routerLink="/job-recruiter" >
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>cancel</mat-icon>
+          <span>Log out</span>
+        </button>
+      </mat-menu>
+
+    </div>
+    
+</div>
+  
+</mat-toolbar>
+<div *ngIf ="open.checked">
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">Home</div>
+  </mat-toolbar>
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">About Us</div>
+  </mat-toolbar>
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">Service</div>
+  </mat-toolbar>
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">Faq</div>
+  </mat-toolbar>
+</div>

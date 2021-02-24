@@ -1,0 +1,235 @@
+<app-profile-navbar></app-profile-navbar>
+
+<!--
+<mat-toolbar  fxLayout="row" fxLayoutAlign="space-between" color="primary">
+  
+  <div fxShow fxHide.gt-sm fxLayout="row" fxLayoutAlign="center"><mat-button-toggle mat-icon-button #open><mat-icon>list</mat-icon></mat-button-toggle></div>
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="30px" fxHide.lt-md>
+    <div fxFlexAlign="center" class="nav-item" [routerLink]="['/']">JobHeist</div> 
+    <div fxFlexAlign="center" class="nav-item">About Us</div> 
+    <div fxFlexAlign="center" class="nav-item">Service</div> 
+    <div fxFlexAlign="center" class="nav-item">Faq</div>    
+  </div>
+  
+  
+  
+  <div fxLayout="row">
+  
+      <div >
+        <button mat-icon-button disableRipple [matMenuTriggerFor]="menu2" >
+          <div class="mat-card-avatar" [ngStyle]="{'background-color': circleColor }">
+            {{initial}}
+          </div>
+        </button>
+      
+        <mat-menu #menu2="matMenu">
+          <button mat-menu-item routerLink="/dashboard">
+            <mat-icon>dashboard</mat-icon>
+            <span>My dashboard</span>
+          </button>
+          <button mat-menu-item routerLink="/job-seeker" >
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>cancel</mat-icon>
+            <span>Log out</span>
+          </button>
+        </mat-menu>
+      </div>
+    
+  </div>
+  
+</mat-toolbar>
+
+<div *ngIf ="open.checked">
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">Home</div>
+  </mat-toolbar>
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">About Us</div>
+  </mat-toolbar>
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">Service</div>
+  </mat-toolbar>
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">Faq</div>
+  </mat-toolbar>
+</div>
+-->
+<mat-toolbar-row class="bgcol">
+  <span class="title-center">Handpicked Jobs for You</span>
+</mat-toolbar-row>
+
+<!-- search bar -->
+<div id="searchbar" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px" *ngIf="!filters" >
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <mat-icon class="clickable" matTooltip="use filter" (click)="filters = !filters">filter_alt</mat-icon>
+    <span class="clickable" (click)="filters = !filters">Refine Search</span>
+    <!-- <mat-icon (click)="clear()">backspace</mat-icon> -->
+  </div>
+
+  <mat-form-field id="search" appearance="outline" class="wid">
+    <div fxLayout="row">
+      <input matInput placeholder="Ex: developer " [(ngModel)]="search">
+      <mat-icon *ngIf="(search !== '' && search !== undefined)" (click)="clear()">clear</mat-icon>
+      <mat-icon class="clickable" (click)="searchnow()">search</mat-icon>
+    </div>
+  </mat-form-field>
+  
+</div>
+
+<div *ngIf="filters" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="25px">
+
+  <div>
+    <mat-icon class="clickable" matTooltip="close filter" (click)="filters = !filters">filter_alt</mat-icon>
+    <span class="clickable" (click)="filters = !filters">Simplfy Search</span>
+  </div>
+  
+  <div fxLayout.lt-md="column" fxLayoutGap.lt-md="-15px" fxLayoutGap="25px">
+    <mat-form-field appearance="outline">
+      <mat-label>Location</mat-label>
+      <input matInput [(ngModel)]="filter_location">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <input matInput [(ngModel)]="filter_role">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Skill</mat-label>
+      <input matInput [(ngModel)]="filter_skill">
+    </mat-form-field>
+  </div>
+    <mat-icon class="clickable" (click)="searchnowFilter()">search</mat-icon>
+    <mat-icon class="clickable" matTooltip="clear all fields" (click)="clear()">backspace</mat-icon>
+
+</div>
+
+
+  
+
+<!-- --------------------------------- -->
+<!-- ---------------------------------custom navbar with search ends----------------------------------- -->
+<!-- --------------------------------- -->
+
+
+<!-- | searchFilter:searchTerm -->
+ 
+<div fxLayout.gt-sm="row wrap" fxLayout.lt-md="column" fxLayoutAlign="start" fxLayoutAlign.lt-md="space-between center">
+  <div *ngFor="let el of obs | async">
+    <mat-card fxFlexAlign="center" >
+     <mat-card-header>
+      <div fxLayout="column" fxLayoutAlign="left" >
+        
+        <!-- row 1 -->
+        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="2px">
+         
+              <mat-icon matTooltip="Name of Job">business_center</mat-icon>
+            <mat-card-title class="jobTitle">{{el.jobName | titlecase | truncate:[18, '...']}}</mat-card-title>
+         
+        </div>
+
+        <!-- row 2 -->
+        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="3px">
+
+          <mat-icon matTooltip="Name of Organization"> business</mat-icon>
+          <mat-card-title class="organisation">{{el.organisation | titlecase | truncate:[18, '...']}}</mat-card-title>
+         
+        </div>
+
+        <div fxLayout="row">
+          
+        <!-- row 3 -->
+          <mat-card-subtitle><div fxLayout="row" fxLayoutGap="7px"><mat-icon matTooltip="was Posted time ago">timelapse</mat-icon><span>{{wasPosted(el.createdOn)}}</span></div></mat-card-subtitle>
+        
+
+        </div>
+
+      </div>
+        
+      <!--  <mat-card-subtitle *ngFor="let e of el.locationsAvailable">Location :{{e.name}}</mat-card-subtitle> -->
+        <!-- <mat-card-subtitle>Experience :{{el.candidateProfile.totalExperience.minValue}}</mat-card-subtitle> -->
+        <!-- <mat-card-subtitle *ngFor="let e of el.candidateProfile.skill">Skills :{{e.skill}}</mat-card-subtitle> -->
+        <!-- <mat-card-subtitle >Salary :{{el.expectedSalary.maxSalary}}</mat-card-subtitle> -->
+         <!-- <mat-card-subtitle >Salary :{{el.expectedSalary.maxSalary}}</mat-card-subtitle> -->
+       
+     </mat-card-header>
+     <!-- <button mat-raised-button>APPLY</button> -->
+     <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
+      <!-- <button mat-raised-button class="visit-button">Visit</button> -->
+      <button mat-raised-button color="accent" *ngIf="!checkIfApplied(el.id)" (click)="jobApply(el.id)">APPLY</button>
+      <button mat-raised-button color="accent" *ngIf="checkIfApplied(el.id)" (click)="jobApply(el.id)">APPLIED</button>
+     </div>
+     
+    </mat-card>
+  </div>
+</div>
+
+<div *ngIf="obs === undefined || (obs | async)?.length === 0" class="mat-typography" fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <h1 fxHide.lt-sm>Oops, we do not have any recommendations for you yet</h1>
+    <h2 fxHide.gt-xs>Oops, we do not have any recommendations for you yet</h2>
+    <div fxFlexAlign="center"><mat-icon fxHide.lt-sm>sentiment_very_dissatisfied</mat-icon></div>
+  </div>
+  
+  <h4>- try checking later sometime</h4>
+  <h4>- maybe tell us more about yourself, your skills</h4>
+</div>
+
+
+<!-- ----------------------below implementation for dummy data only  ----------------------------->
+
+<!-- <div *ngFor="let job of jobs | searchFilter:searchTerm">
+  <div fxLayout.lt-md="column" fxHide.gt-sm fxLayoutAlign="center">
+    <mat-card fxFlexAlign="center" >
+     <mat-card-header>
+       
+       <mat-card-subtitle>Role :{{job.jobTitle}}</mat-card-subtitle>
+       <mat-card-subtitle>Location :{{job.workingLocation}}</mat-card-subtitle>
+       
+       <mat-card-subtitle>Salary :{{job.salary}}</mat-card-subtitle>
+       
+     </mat-card-header>
+     <button mat-raised-button>APPLY</button>
+     <button mat-raised-button class="visit-button">Visit</button>
+    </mat-card>
+  </div>
+</div>
+
+<div fxLayout.gt-sm="row wrap" fxHide.lt-md fxLayoutAlign="center">
+ <div *ngFor="let job of jobs | searchFilter:searchTerm">
+   <mat-card fxFlexAlign="center" >
+    <mat-card-header>
+      
+      
+       <mat-card-subtitle>Role :{{job.jobTitle}}</mat-card-subtitle>
+       <mat-card-subtitle>Location :{{job.workingLocation}}</mat-card-subtitle>
+       
+       <mat-card-subtitle>Salary :{{job.salary}}</mat-card-subtitle>
+      
+    </mat-card-header>
+    <button mat-raised-button>APPLY</button>
+    <button mat-raised-button class="visit-button">Visit</button>
+   </mat-card>
+ </div>
+</div>
+
+<div *ngIf="(jobs | searchFilter:searchTerm).length === 0" class="mat-typography" fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <h1 fxHide.lt-sm>Oops, could not find what you were looking for</h1>
+    <h2 fxHide.gt-xs>Oops, could not find what you were looking for</h2>
+    <div fxFlexAlign="center"><mat-icon fxHide.lt-sm>sentiment_very_dissatisfied</mat-icon></div>
+  </div>
+  
+  <h4>- try checking the spelling</h4>
+  <h4>- try searching using a less specific word</h4>
+</div> -->
+  <mat-paginator [pageSizeOptions]="[8,12,16]" showFirstLastButtons></mat-paginator>
+
+
+  <app-footer></app-footer>
+  <router-outlet></router-outlet>
+  

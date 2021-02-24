@@ -1,0 +1,108 @@
+<app-navbar-profile-recruiter></app-navbar-profile-recruiter>
+
+<mat-toolbar-row class="bgcol">
+  <span class="title-center">All Your Job Postings</span>
+</mat-toolbar-row>
+
+    <!-- <mat-accordion> -->
+        <!-- active listing -->
+        <!-- <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Currently Active
+              </mat-panel-title> -->
+              <!-- <mat-panel-description>Currently I am </mat-panel-description> -->
+            <!-- </mat-expansion-panel-header> -->
+          <!--  
+            <div *ngFor="let el of obs" class="backdrop">
+                <div fxLayout.lt-sm="column" fxHide.gt-sm fxLayoutAlign="start">
+                  <mat-card fxFlexAlign="center" >
+                   <mat-card-header>
+                     <mat-card-title>Role :{{el.jobName}}</mat-card-title>
+                     <mat-card-subtitle *ngFor="let e of el.locationsAvailable">Location :{{e.name}}</mat-card-subtitle>
+                     <mat-card-subtitle >Salary :{{el.expectedSalary.maxSalary}}</mat-card-subtitle>
+                     
+                   </mat-card-header>
+                  <div fxLayoutAlign="end" fxLayoutGap="10px">
+                 <button mat-icon-button matTooltip="View all details of your posting" (click)="showshortlisted(el.id)">
+                  <mat-icon >open_in_full</mat-icon>
+                 </button>
+                   
+                  </div>
+                   
+                  </mat-card>
+                </div>
+              </div>
+            -->
+
+            
+              <!-- responsive for big screens -->
+             <div fxLayout.gt-sm="row wrap" fxLayout.lt-md="column"  fxLayoutAlign="center" fxLayoutAlign.lt-md="space-between center">
+               <div *ngFor="let el of obs" class="backdrop">
+                 <mat-card fxFlexAlign="center" >
+                  <mat-card-header>
+                     <mat-card-title>{{el.jobName | truncate:[18, '...']}}</mat-card-title>
+                     <mat-card-subtitle *ngFor="let e of el.locationsAvailable" matTooltip="Joining location">
+                       <div fxLayout="row">
+                        <mat-icon class="location-icon" > location_on </mat-icon> 
+                      <div class="location">{{e.name | truncate:[18, '...']}}</div>
+                       </div>
+                      
+
+                     </mat-card-subtitle>
+                     <!-- <mat-card-subtitle>Experience :{{el.candidateProfile.totalExperience.minValue}}</mat-card-subtitle>
+                     <mat-card-subtitle *ngFor="let e of el.candidateProfile.skill">Skills :{{e.skill}}</mat-card-subtitle> -->
+                     <mat-card-subtitle matTooltip="Maximum salary in Rupees">
+                       <div fxLayout="row">
+                        <mat-icon class="location-icon" > attach_money </mat-icon> 
+                      <div class="location">{{el.expectedSalary.maxSalary | currency:'INR'}}</div>
+                       </div>
+                      
+                      </mat-card-subtitle>
+
+                      <mat-card-subtitle><div fxLayout="row" fxLayoutGap="10px"><mat-icon>timelapse</mat-icon><span>{{wasPosted(el.createdOn)}}</span></div></mat-card-subtitle>
+                      
+                  </mat-card-header>
+                  <!-- for more details implement dialogbox view of all details -->
+                 <div fxLayoutAlign="end" fxLayoutGap="10px">
+                  <!-- <button mat-icon-button matTooltip="Shortlisted Candidates" (click)="showshortlisted(el.id)">
+                    <mat-icon>groups</mat-icon>
+                  </button> -->
+                 <button mat-icon-button matTooltip="View all details of your posting" (click)="showshortlisted(el.id)">
+                  <mat-icon >open_in_full</mat-icon>
+                 </button>
+                </div>
+                  
+                 </mat-card>
+               </div>
+             </div>
+             <div *ngIf="obs === undefined || obs.length === 0" fxLayout="column" fxLayoutAlign="center center">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <h1 fxHide.lt-sm>Looks like you have not posted anything yet</h1>
+                <h2 fxHide.gt-xs>Looks like you have not posted anything yet</h2>
+                <div fxFlexAlign="center"><mat-icon fxHide.lt-sm>sentiment_very_dissatisfied</mat-icon></div>
+              </div>
+              
+              <h4>- post a job now</h4>
+              <h4>- maybe its taking a while for us to upload your job</h4>
+            </div>
+             
+          <!-- </mat-expansion-panel> -->
+
+
+
+          
+      <!-- </mat-accordion> -->
+
+
+
+
+
+
+
+
+
+  <!-- <mat-paginator [pageSizeOptions]="[8,12,16]" showFirstLastButtons></mat-paginator> -->
+  <app-footer></app-footer>
+  <router-outlet></router-outlet>
+  

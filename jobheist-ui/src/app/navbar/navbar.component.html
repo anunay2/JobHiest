@@ -1,0 +1,51 @@
+<!-- navbar -->
+
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between" color="primary">
+  
+  <div fxShow fxHide.gt-sm fxLayout="row" fxLayouALign="center"><mat-button-toggle #open><mat-icon>list</mat-icon></mat-button-toggle></div>
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="30px" fxHide.lt-md>
+    <div fxFlexAlign="center" class="nav-item" [routerLink]="['/']">
+      <a routerLink='/'>
+        <img src="../assets/images/logo new.jpg" class="logo-image">
+      </a>
+    </div>
+    <div fxFlexAlign="center" class="nav-item heist" [routerLink]="['/']">
+      <a routerLink='/'>JobHeist</a>
+    </div>
+    <div fxFlexAlign="center" class="nav-item">About Us</div> 
+    <div fxFlexAlign="center" class="nav-item">Service</div> 
+    <div fxFlexAlign="center" class="nav-item">Faq</div>    
+  </div>
+  <!-- <div fxLayout="row" fxLayoutAlign="center">
+      <button mat-button [routerLink]="['/']" class="nav-logo">Good Labour</button>
+    </div> -->
+    <div fxLayoutAlign="center center">      
+
+        <mat-form-field class="loginfields" appearance="outline">
+          <input class="logininputs" matInput placeholder="emailid" type="emailid" [(ngModel)]="emailid">
+        </mat-form-field>
+
+        <mat-form-field class="loginfields" appearance="outline">
+          <input class="logininputs" matInput placeholder="password" type="password" [(ngModel)]="password">
+        </mat-form-field>
+
+        <button mat-button type="submit" (click)="onLoginSubmit()">LOGIN</button>
+
+    </div>
+  
+</mat-toolbar>
+<div *ngIf ="open.checked">
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">JobHeist</div>
+  </mat-toolbar>
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">About Us</div>
+  </mat-toolbar>
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">Service</div>
+  </mat-toolbar>
+  <mat-toolbar color="primary" fxlayout="column">
+    <div fxFlexAlign="start">Faq</div>
+  </mat-toolbar>
+</div>
+

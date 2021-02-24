@@ -1,0 +1,38 @@
+<form class="info-form" [formGroup]="educationForm" (ngSubmit)="onSaveEducation()">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>School</mat-label>
+      <input matInput formControlName="school" [(ngModel)]="education.school">
+    </mat-form-field>
+
+    
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Degree</mat-label>
+      <input matInput formControlName="degree" [(ngModel)]="education.degree">
+    </mat-form-field> <br>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Specialization</mat-label>
+      <input matInput formControlName="field"  [(ngModel)]="education.field">
+    </mat-form-field> 
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Start Year</mat-label>
+        <input matInput formControlName="startyear"  [(ngModel)]="education.startyear">
+        
+      </mat-form-field> <br>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>End Year</mat-label>
+        <input matInput formControlName="endyear"  [(ngModel)]="education.endyear">
+        
+      </mat-form-field> 
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%" fxLayoutGap.lt-sm="5px" fxLayoutAlign="center">
+    <button mat-raised-button color="primary" 
+    type="submit" [disabled]="!educationForm.valid">Save</button>
+    <button mat-raised-button type="button"
+    (click)="cancelEducation()">Cancel</button>
+    <button mat-raised-button type="button" color="primary" *ngIf="old"
+    (click)="deleteEducation()">Delete</button>
+    </div>
+  </form>

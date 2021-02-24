@@ -1,0 +1,26 @@
+table caption{
+    font-size: 20px;
+    font-weight: bold;
+    margin: auto;
+    justify-content: left;
+    text-align: left;
+}
+mat-form-field{
+    width: 140px;
+    margin: 10px;
+}
+#skillName{
+    width: 140px;
+}
+#proficiency{
+    width: 140px;
+}
+#confirm{
+    margin-top: 5%;
+}
+#clear{
+    margin-top: 5%;
+}
+#hint{
+    padding: 10px;
+}

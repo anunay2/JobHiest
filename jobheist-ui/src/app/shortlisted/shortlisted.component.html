@@ -1,0 +1,170 @@
+<app-navbar-profile-recruiter></app-navbar-profile-recruiter>
+<mat-toolbar-row class="bgcol">
+    <span class="title-center"><h1>Your Posting for the Role : {{job.jobTitle }}</h1></span>
+  </mat-toolbar-row>
+
+
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Details">
+    <div fxLayout="column">
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+          <mat-card class="field">Job Title</mat-card>
+          <mat-card class="value">{{job.jobTitle | titlecase}}</mat-card>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+          <mat-card class="field">Job Description</mat-card>
+          <mat-card class="value">{{job.jobDescription}}</mat-card>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+          <mat-card class="field">Working Location</mat-card>
+          <mat-card class="value">{{job.workingLocation | titlecase}}</mat-card>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+          <mat-card class="field">Salary Range</mat-card>
+          <mat-card class="value">{{job.salary.minValue | currency:'INR'}} - {{job.salary.maxValue | currency:'INR'}}</mat-card>
+        </div>
+      </mat-card>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="center" class="candidateProfile">
+        Candidate Profile :
+      </div>
+
+      <br>
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+          <mat-card class="field">Total experience</mat-card>
+          <mat-card class="value">{{job.candidateProfile.totalExperience.minValue}} - {{job.candidateProfile.totalExperience.maxValue}} years</mat-card>
+        </div>
+      </mat-card>
+      
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+          <mat-card class="field">Domains</mat-card>
+          <mat-card class="value"> 
+            <mat-chip-list  aria-label="Color selection">
+              <div *ngFor="let item of job.candidateProfile.domains">
+                  <mat-chip  selected color="accent" >
+                    {{item}}
+                  </mat-chip>
+              </div>
+            </mat-chip-list>
+          </mat-card>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+          <mat-card class="field">Roles</mat-card>
+          <mat-card class="value"> 
+            <mat-chip-list  aria-label="Color selection">
+              <div *ngFor="let item of job.candidateProfile.roles">
+                  <mat-chip  selected color="accent" >
+                    {{item}}
+                  </mat-chip>
+              </div>
+            </mat-chip-list>
+          </mat-card>
+        </div>
+      </mat-card>
+      
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1%">
+          <mat-card class="field">Skills</mat-card>
+          <mat-card class="value"> 
+            <mat-chip-list  aria-label="Color selection">
+              <div *ngFor="let skill of job.candidateProfile.skill">
+                <div [ngSwitch]="skill.proficiencyLevel">
+                  <mat-chip  selected color="accent" matTooltip="Basic" *ngSwitchCase="'BASIC'">
+                    {{skill.skill}}
+                  </mat-chip>
+                  <mat-chip  selected color="primary" matTooltip="Intermediate" *ngSwitchCase="'INTERMEDIATE'">
+                    {{skill.skill}}
+                  </mat-chip>
+                  <mat-chip  selected color="warn" matTooltip="Advanced" *ngSwitchCase="'ADVANCED'">
+                    {{skill.skill}}
+                  </mat-chip>
+                </div>
+                
+              </div>
+              
+            </mat-chip-list>
+          </mat-card>
+        </div>
+      </mat-card>
+
+
+    </div>
+  
+    </mat-tab>
+    <mat-tab label="Shortlisted Candidates">
+          <div fxLayout.gt-sm="row wrap" fxLayout.lt-md="column" fxLayoutGap="5%"
+          fxLayoutAlign="center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="2%">
+            <div *ngFor="let candidate of candidatesList; index as i">
+              <mat-card class="example-card">    
+                  <mat-card-header class="profileHeader">
+                    <div mat-card-avatar *ngIf="initialsList[i].length !== 0" class="initials-image" [ngStyle]="{'background-color': colorsList[i] }">
+                      {{initialsList[i]}}
+                    </div>
+                    <div mat-card-avatar *ngIf="initialsList[i].length === 0">
+                      <img src="./assets/images/johndoe.jpg" alt="">
+                    </div>
+                      <mat-card-title class="profileTitle">{{candidate.name}}</mat-card-title>
+                      <mat-card-subtitle class="profileSubtitle">{{candidate.email}}</mat-card-subtitle>
+                  </mat-card-header>
+                <mat-card-content>
+                  <h3>Skills</h3>
+                  <mat-chip-list  aria-label="Color selection">
+                    <div *ngFor="let skill of candidate.skills">
+                      <div [ngSwitch]="skill.profiencyLevel">
+                        <mat-chip  selected color="accent" matTooltip="Basic" *ngSwitchCase="'BASIC'">
+                          {{skill.skill}}
+                        </mat-chip>
+                        <mat-chip  selected color="primary" matTooltip="Intermediate" *ngSwitchCase="'INTERMEDIATE'">
+                          {{skill.skill}}
+                        </mat-chip>
+                        <mat-chip  selected color="warn" matTooltip="Advanced" *ngSwitchCase="'ADVANCED'">
+                          {{skill.skill}}
+                        </mat-chip>
+                      </div>
+                    </div>
+                  </mat-chip-list>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button (click)="viewCandidate(candidate.email)">
+                    View More
+                  </button>
+                </mat-card-actions>
+                
+              </mat-card>
+
+            </div>
+          </div>
+          
+        <div *ngIf="candidatesAuto.length === 0" fxLayout="column" fxLayoutAlign="center center">
+          <div fxLayout="row" fxLayoutGap="10px" >
+            <h1 fxHide.lt-sm>Oops, we do not have any recommendations for you yet</h1>
+            <h2 fxHide.gt-xs>Oops, we do not have any recommendations for you yet</h2>
+            <div fxFlexAlign="center"><mat-icon fxHide.lt-sm>sentiment_very_dissatisfied</mat-icon></div>
+          </div>
+          <div>
+            <h4>- try checking later sometime</h4>
+            <h4>- maybe tell us more about yourself, your skills</h4>
+          </div>
+          
+        </div>
+    </mat-tab>
+    
+
+  </mat-tab-group>
+
+  <app-footer></app-footer>

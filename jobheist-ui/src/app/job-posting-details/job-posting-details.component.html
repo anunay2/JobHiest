@@ -1,0 +1,28 @@
+<app-profile-navbar></app-profile-navbar>
+<mat-toolbar-row class="bgcol">
+    <span class="title-center">The Candidates Shortlisted For Your Posting so and so:</span>
+  </mat-toolbar-row>
+
+<h1>Your Posting for the Role : {{id1}}</h1>
+<mat-tab-group mat-align-tabs="start">
+    <mat-tab label="Details">
+
+  --------------------------- ALL DETAILS IN DETAIL WILL COME HERE ----------------------------------
+  --------------------------- ALL DETAILS IN DETAIL WILL COME HERE ----------------------------------
+  --------------------------- ALL DETAILS IN DETAIL WILL COME HERE ----------------------------------
+  --------------------------- ALL DETAILS IN DETAIL WILL COME HERE ----------------------------------
+
+    </mat-tab>
+    <mat-tab label="Shortlisted Candidates">
+        <div *ngFor="let candidate of candidates_auto">
+            <mat-card>
+            <div>
+                <span>{{candidate.email}}</span>
+            </div>
+            </mat-card>
+        </div>
+    </mat-tab>
+
+  </mat-tab-group>
+
+  <app-footer></app-footer>
