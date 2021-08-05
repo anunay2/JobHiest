@@ -66,56 +66,56 @@ services:
       - '../jobheist-data/sql-data:/var/lib/mysql'
 
 
-#  mongo:
-#    image: mongo:latest
-#    # environment:
-#    #   MONGO_INITDB_ROOT_USERNAME: root
-#    #   MONGO_INITDB_ROOT_PASSWORD: rootpassword
-#    restart: always
-#    ports:
-#      - 27017:27017
-#    hostname: localhost
-#    network_mode: host
-#    volumes:
-#      - '../jobheist-data/mongo-data:/data/db'
-#
-#  redis:
-#    image: redis
-#    restart: always
-#    ports:
-#    - 6379:6379
-#    hostname: localhost
-#    network_mode: host
-#
-#  neo4j :
-#    image : neo4j:latest
-#    restart: always
-#    environment:
-#      NEO4J_AUTH: none
-#    ports :
-#      -  7474:7474
-#      -  7687:7687
-#    hostname: localhost
-#    network_mode: host
-#    volumes :
-#      - '../jobheist-data/neo4j-data:/data'
+ mongo:
+   image: mongo:latest
+   environment:
+     MONGO_INITDB_ROOT_USERNAME: root
+     MONGO_INITDB_ROOT_PASSWORD: rootpassword
+   restart: always
+   ports:
+     - 27017:27017
+   hostname: localhost
+   network_mode: host
+   volumes:
+     - '../jobheist-data/mongo-data:/data/db'
 
-#  job-indexing:
-#    build: indexing-service/job-indexing/
-#    container_name: job-indexing
-#    depends_on:
-#      - mongo
-#      - neo4j
-#      - zipkin
-#      - config-server
-#
-#    restart: always
-#    volumes:
-#      - ../jobheist-data/logs:/usr/src/logs
-#    ports:
-#      - 8020:8020
-#    hostname: localhost
-#    network_mode: host
+ redis:
+   image: redis
+   restart: always
+   ports:
+   - 6379:6379
+   hostname: localhost
+   network_mode: host
+
+ neo4j :
+   image : neo4j:latest
+   restart: always
+   environment:
+     NEO4J_AUTH: none
+   ports :
+     -  7474:7474
+     -  7687:7687
+   hostname: localhost
+   network_mode: host
+   volumes :
+     - '../jobheist-data/neo4j-data:/data'
+
+ job-indexing:
+   build: indexing-service/job-indexing/
+   container_name: job-indexing
+   depends_on:
+     - mongo
+     - neo4j
+     - zipkin
+     - config-server
+
+   restart: always
+   volumes:
+     - ../jobheist-data/logs:/usr/src/logs
+   ports:
+     - 8020:8020
+   hostname: localhost
+   network_mode: host
 
 
 
@@ -126,7 +126,7 @@ services:
     depends_on:
       - rabbitmq
       - db
-#      - zipkin
+     - zipkin
       - config-server
     restart: always
     volumes:
@@ -142,8 +142,8 @@ services:
     restart: always
     depends_on:
       - rabbitmq
-#      - mongo
-#      - zipkin
+     - mongo
+     - zipkin
       - config-server
     network_mode: host
     volumes:
@@ -151,147 +151,147 @@ services:
     hostname: localhost
     ports:
       - 8030:8030
-#
-#  profile-indexing:
-#    build: indexing-service/profile-indexing/
-#    container_name: profile-indexing
-#    depends_on:
-#      - rabbitmq
-#      - neo4j
-#      - zipkin
-#      - config-server
-#    restart: always
-#    network_mode: host
-#    volumes:
-#      - ../jobheist-data/logs:/usr/src/logs
-#    hostname: localhost
-#    ports:
-#      - 8025:8025
-#
-#  experience-processing:
-#    build: processing-service/experience-processing/
-#    container_name: experience-processing
-#    restart: always
-#    depends_on:
-#      - rabbitmq
-#      - zipkin
-#      - config-server
-#    network_mode: host
-#    volumes:
-#      - ../jobheist-data/logs:/usr/src/logs
-#    hostname: localhost
-#    ports:
-#      - 8035:8035
-#
-#  personal-information-processing:
-#    build: processing-service/personal-information-processing/
-#    container_name: personal-information-processing
-#    restart: always
-#    depends_on:
-#      - rabbitmq
-#      - zipkin
-#      - config-server
-#      - api-gateway
-#    network_mode: host
-#    volumes:
-#      - ../jobheist-data/logs:/usr/src/logs
-#    hostname: localhost
-#    ports:
-#      - 8040:8040
-#
-#  skill-processing:
-#    build: processing-service/skill-processing/
-#    container_name: skill-processing
-#    restart: always
-#    depends_on:
-#      - rabbitmq
-#      - redis
-#      - zipkin
-#      - config-server
-#      - api-gateway
-#    network_mode: host
-#    volumes:
-#      - ../jobheist-data/logs:/usr/src/logs
-#    hostname: localhost
-#    ports:
-#      - 8045:8045
-#
-#  jobrecruiterprofile-service:
-#    build: jobrecruiterprofile-service/
-#    container_name: recruiter-profile
-#    restart: always
-#    depends_on:
-#      - rabbitmq
-#      - mongo
-#      - zipkin
-#      - config-server
-#      - api-gateway
-#    network_mode: host
-#    volumes:
-#      - ../jobheist-data/logs:/usr/src/logs
-#    hostname: localhost
-#    ports:
-#      - 8111:8111
-#
-#  query-engine:
-#    build: query-engine/
-#    restart: always
-#    depends_on:
-#      - neo4j
-#      - zipkin
-#      - mongo
-#      - config-server
-#      - api-gateway
-#    network_mode: host
-#    volumes:
-#      - ../jobheist-data/logs:/usr/src/logs
-#    hostname: localhost
-#    ports:
-#      - 8050:8050
-#
-#  zipkin:
-#    image: openzipkin/zipkin
-#    container_name: zipkin
-#    restart: always
-#    network_mode: host
-#    hostname: localhost
-#    ports:
-#      - 9411:9411
 
-#
-#  jobheist-ui:
-#    build: jobheist-ui/
-#    container_name: jobheist-ui
-#    restart: always
-#    network_mode: host
-#    hostname: localhost
-#    ports:
-#      - 4200:4200
-#    command: >
-#        bash -c "npm install && npm install -g @angular/cli@10.1.4 && ng serve --host 0.0.0.0 --port 4200"
-#
+ profile-indexing:
+   build: indexing-service/profile-indexing/
+   container_name: profile-indexing
+   depends_on:
+     - rabbitmq
+     - neo4j
+     - zipkin
+     - config-server
+   restart: always
+   network_mode: host
+   volumes:
+     - ../jobheist-data/logs:/usr/src/logs
+   hostname: localhost
+   ports:
+     - 8025:8025
 
-#  prometheus:
-#    image: prom/prometheus:latest
-#    restart: always
-#    network_mode: host
-#    hostname: localhost
-#    volumes:
-#      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-#    ports:
-#      - 9090:9090
-#
-#  grafana:
-#    image: grafana/grafana
-#    restart: always
-#    network_mode: host
-#    hostname: localhost
-#    ports:
-#      - 3000:3000
-#    volumes:
-#      - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
-#    depends_on:
-#      - prometheus
+ experience-processing:
+   build: processing-service/experience-processing/
+   container_name: experience-processing
+   restart: always
+   depends_on:
+     - rabbitmq
+     - zipkin
+     - config-server
+   network_mode: host
+   volumes:
+     - ../jobheist-data/logs:/usr/src/logs
+   hostname: localhost
+   ports:
+     - 8035:8035
+
+ personal-information-processing:
+   build: processing-service/personal-information-processing/
+   container_name: personal-information-processing
+   restart: always
+   depends_on:
+     - rabbitmq
+     - zipkin
+     - config-server
+     - api-gateway
+   network_mode: host
+   volumes:
+     - ../jobheist-data/logs:/usr/src/logs
+   hostname: localhost
+   ports:
+     - 8040:8040
+
+ skill-processing:
+   build: processing-service/skill-processing/
+   container_name: skill-processing
+   restart: always
+   depends_on:
+     - rabbitmq
+     - redis
+     - zipkin
+     - config-server
+     - api-gateway
+   network_mode: host
+   volumes:
+     - ../jobheist-data/logs:/usr/src/logs
+   hostname: localhost
+   ports:
+     - 8045:8045
+
+ jobrecruiterprofile-service:
+   build: jobrecruiterprofile-service/
+   container_name: recruiter-profile
+   restart: always
+   depends_on:
+     - rabbitmq
+     - mongo
+     - zipkin
+     - config-server
+     - api-gateway
+   network_mode: host
+   volumes:
+     - ../jobheist-data/logs:/usr/src/logs
+   hostname: localhost
+   ports:
+     - 8111:8111
+
+ query-engine:
+   build: query-engine/
+   restart: always
+   depends_on:
+     - neo4j
+     - zipkin
+     - mongo
+     - config-server
+     - api-gateway
+   network_mode: host
+   volumes:
+     - ../jobheist-data/logs:/usr/src/logs
+   hostname: localhost
+   ports:
+     - 8050:8050
+
+ zipkin:
+   image: openzipkin/zipkin
+   container_name: zipkin
+   restart: always
+   network_mode: host
+   hostname: localhost
+   ports:
+     - 9411:9411
+
+
+ jobheist-ui:
+   build: jobheist-ui/
+   container_name: jobheist-ui
+   restart: always
+   network_mode: host
+   hostname: localhost
+   ports:
+     - 4200:4200
+   command: >
+       bash -c "npm install && npm install -g @angular/cli@10.1.4 && ng serve --host 0.0.0.0 --port 4200"
+
+
+ prometheus:
+   image: prom/prometheus:latest
+   restart: always
+   network_mode: host
+   hostname: localhost
+   volumes:
+     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+   ports:
+     - 9090:9090
+
+ grafana:
+   image: grafana/grafana
+   restart: always
+   network_mode: host
+   hostname: localhost
+   ports:
+     - 3000:3000
+   volumes:
+     - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+   depends_on:
+     - prometheus
 
 
   elasticsearch:
@@ -301,9 +301,9 @@ services:
         source: ./config/elastic.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
-    #      - type: volume
-    #        source: elasticsearch
-    #        target: /usr/share/elasticsearch/data
+         - type: volume
+           source: elasticsearch
+           target: /usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
